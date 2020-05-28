@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+
+{% block title %}Flasky{% endblock %}
+
+{% block page_content %}
+    <h1>Tasks</h1>
+
+    <div class="row row-cols-1 row-cols-md-3">
+
+        {% for task in tasks %}
+        <div class="col mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                <h5 class="card-title"><span class="{% if task.done %}done{% endif %}">{{ task.title }}</span></h5>
+                <p class="card-text"><span class="{% if task.done %}done{% endif %}">{{ task.description }}</span></p>
+                <a href="{{ url_for('delete_task', id=task.id) }}"><div class="btn btn-danger">Delete</div></a>
+                <a href="{{ url_for('update_task', id=task.id) }}"><div class="btn btn-info">Edit!</div></a>
+                <a href="{{ url_for('doned_task', id=task.id) }}"><div class="btn btn-primary"><span class="">DONE!</span></div></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
